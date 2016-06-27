@@ -4,7 +4,7 @@ import torndb
 db = torndb.Connection("120.27.92.166","apk",user="root",password="112112")
 #按类别统计各权限使用频度
 def get_frequency():
-    permissions = db.query("select name from permission WHERE frequency <> 0;")
+    permissions = db.query("select name from permission_list WHERE frequency <> 0;")
     for per in permissions:
         sql = "insert into statistics select count(*),category,permission.name from permission,apk_permission where permission.name = '"+per['name']+"' and "+per['name']+" = 1 group by category;"
         db.execute(sql)
